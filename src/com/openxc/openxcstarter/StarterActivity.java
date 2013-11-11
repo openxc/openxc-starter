@@ -14,13 +14,13 @@ import android.widget.TextView;
 import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.UnrecognizedMeasurementTypeException;
-import com.openxc.measurements.VehicleSpeed;
+import com.openxc.measurements.EngineSpeed;
 import com.openxc.remote.VehicleServiceException;
 
 public class StarterActivity extends Activity {
 
     private VehicleManager mVehicleManager;
-    private TextView mVehicleSpeedView;
+    private TextView mEngineSpeedView;
     private Intent mVmIntent = null;
     private boolean mBound = false; // added for better example of Activity/Service lifecycle management.
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -31,7 +31,7 @@ public class StarterActivity extends Activity {
                     .getService();
 
             try {
-                mVehicleManager.addListener(VehicleSpeed.class, mSpeedListener);
+                mVehicleManager.addListener(EngineSpeed.class, mSpeedListener);
             } catch (VehicleServiceException e) {
                 e.printStackTrace();
             } catch (UnrecognizedMeasurementTypeException e) {
@@ -54,7 +54,7 @@ public class StarterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starter);
-        mVehicleSpeedView = (TextView) findViewById(R.id.vehicle_speed);
+        mEngineSpeedView = (TextView) findViewById(R.id.vehicle_speed);
     }
 
     @Override
@@ -113,12 +113,12 @@ public class StarterActivity extends Activity {
         }
     }
 
-    VehicleSpeed.Listener mSpeedListener = new VehicleSpeed.Listener() {
+    EngineSpeed.Listener mSpeedListener = new EngineSpeed.Listener() {
         public void receive(Measurement measurement) {
-            final VehicleSpeed speed = (VehicleSpeed) measurement;
+            final EngineSpeed speed = (EngineSpeed) measurement;
             StarterActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    mVehicleSpeedView.setText("Vehicle speed (km/h): "
+                    mEngineSpeedView.setText("Vehicle speed (km/h): "
                             + speed.getValue().doubleValue());
                 }
             });
