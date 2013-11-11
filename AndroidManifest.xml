@@ -3,11 +3,11 @@
     package="com.openxc.openxcstarter"
     android:versionCode="1"
     android:versionName="1.0" >
- 
+
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
- 
+        android:minSdkVersion="10"
+        android:targetSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,12 +18,12 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
- 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <service android:name="com.openxc.VehicleManager"/>
     </application>
- 
+
 </manifest>
