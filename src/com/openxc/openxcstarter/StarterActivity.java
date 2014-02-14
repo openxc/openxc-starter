@@ -18,6 +18,7 @@ import com.openxc.measurements.EngineSpeed;
 import com.openxc.remote.VehicleServiceException;
 
 public class StarterActivity extends Activity {
+    private static final String TAG = "StarterActivity";
 
     private VehicleManager mVehicleManager;
     private TextView mEngineSpeedView;
@@ -37,7 +38,14 @@ public class StarterActivity extends Activity {
         // When the activity goes into the background or exits, we want to make
         // sure to unbind from the service to avoid leaking memory
         if(mVehicleManager != null) {
-            Log.i("openxc", "Unbinding from Vehicle Manager");
+            Log.i(TAG, "Unbinding from Vehicle Manager");
+            try {
+                // Remember to remove your listeners, in typical Android
+                // fashion.
+                mVehicleManager.removeListener(EngineSpeed.class, mSpeedListener);
+            } catch (VehicleServiceException e) {
+                e.printStackTrace();
+            }
             unbindService(mConnection);
             mVehicleManager = null;
         }
@@ -83,7 +91,7 @@ public class StarterActivity extends Activity {
     private ServiceConnection mConnection = new ServiceConnection() {
         // Called when the connection with the VehicleManager service is established, i.e. bound.
         public void onServiceConnected(ComponentName className, IBinder service) {
-            Log.i("openxc", "Bound to VehicleManager");
+            Log.i(TAG, "Bound to VehicleManager");
             // When the VehicleManager starts up, we store a reference to it
             // here in "mVehicleManager" so we can call functions on it
             // elsewhere in our code.
@@ -105,7 +113,7 @@ public class StarterActivity extends Activity {
 
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName className) {
-            Log.w("openxc", "VehicleManager Service  disconnected unexpectedly");
+            Log.w(TAG, "VehicleManager Service  disconnected unexpectedly");
             mVehicleManager = null;
         }
     };
