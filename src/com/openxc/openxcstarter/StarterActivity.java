@@ -81,7 +81,7 @@ public class StarterActivity extends Activity {
                     // Finally, we've got a new value and we're running on the
                     // UI thread - we set the text of the EngineSpeed view to
                     // the latest value
-                    mEngineSpeedView.setText("Vehicle speed (km/h): "
+                    mEngineSpeedView.setText("Engine speed (RPM): "
                             + speed.getValue().doubleValue());
                 }
             });
