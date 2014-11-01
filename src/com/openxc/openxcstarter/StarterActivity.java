@@ -39,13 +39,10 @@ public class StarterActivity extends Activity {
         // sure to unbind from the service to avoid leaking memory
         if(mVehicleManager != null) {
             Log.i(TAG, "Unbinding from Vehicle Manager");
-            try {
-                // Remember to remove your listeners, in typical Android
-                // fashion.
-                mVehicleManager.removeListener(EngineSpeed.class, mSpeedListener);
-            } catch (VehicleServiceException e) {
-                e.printStackTrace();
-            }
+            // Remember to remove your listeners, in typical Android
+            // fashion.
+            mVehicleManager.removeListener(EngineSpeed.class,
+                    mSpeedListener);
             unbindService(mConnection);
             mVehicleManager = null;
         }
@@ -89,8 +86,10 @@ public class StarterActivity extends Activity {
     };
 
     private ServiceConnection mConnection = new ServiceConnection() {
-        // Called when the connection with the VehicleManager service is established, i.e. bound.
-        public void onServiceConnected(ComponentName className, IBinder service) {
+        // Called when the connection with the VehicleManager service is
+        // established, i.e. bound.
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
             Log.i(TAG, "Bound to VehicleManager");
             // When the VehicleManager starts up, we store a reference to it
             // here in "mVehicleManager" so we can call functions on it
@@ -102,13 +101,7 @@ public class StarterActivity extends Activity {
             // have an EngineSpeed.Listener (see above, mSpeedListener) and here
             // we request that the VehicleManager call its receive() method
             // whenever the EngineSpeed changes
-            try {
-                mVehicleManager.addListener(EngineSpeed.class, mSpeedListener);
-            } catch (VehicleServiceException e) {
-                e.printStackTrace();
-            } catch (UnrecognizedMeasurementTypeException e) {
-                e.printStackTrace();
-            }
+            mVehicleManager.addListener(EngineSpeed.class, mSpeedListener);
         }
 
         // Called when the connection with the service disconnects unexpectedly
