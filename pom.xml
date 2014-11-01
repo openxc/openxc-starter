@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.openxcplatform</groupId>
+    <artifactId>openxc-starter</artifactId>
+    <packaging>apk</packaging>
+    <name>OpenXC Starter App</name>
+    <version>6.0.0-SNAPSHOT</version>
+    <description>Starter Android app for OpenXC</description>
+    <url>http://openxcplatform.com</url>
+
+    <licenses>
+        <license>
+            <name>New BSD License</name>
+            <url>http://opensource.org/licenses/BSD-3-Clause</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <android.version>4.1.1.4</android.version>
+        <android.platform>19</android.platform>
+
+        <java.version>1.7</java.version>
+        <android-maven.version>3.8.1</android-maven.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>${android.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.openxcplatform</groupId>
+            <artifactId>openxc</artifactId>
+            <version>${project.version}</version>
+            <type>apklib</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>${android-maven.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <dexOptimize>false</dexOptimize>
+                    <dex>
+                        <jvmArguments>
+                            <argument>-Xms256m</argument>
+                            <argument>-Xmx1052m</argument>
+                        </jvmArguments>
+                    </dex>
+                    <sdk>
+                        <platform>${android.platform}</platform>
+                    </sdk>
+                    <undeployBeforeDeploy>false</undeployBeforeDeploy>
+                </configuration>
+            </plugin>
+        </plugins>
+        <sourceDirectory>src</sourceDirectory>
+    </build>
+</project>
