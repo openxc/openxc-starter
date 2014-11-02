@@ -24,7 +24,7 @@
         <android.platform>19</android.platform>
 
         <java.version>1.7</java.version>
-        <android-maven.version>3.8.1</android-maven.version>
+        <android-maven.version>4.0.0-rc.3</android-maven.version>
     </properties>
 
     <dependencies>
@@ -38,7 +38,7 @@
             <groupId>com.openxcplatform</groupId>
             <artifactId>openxc</artifactId>
             <version>${project.version}</version>
-            <type>apklib</type>
+            <type>aar</type>
         </dependency>
     </dependencies>
 
@@ -55,11 +55,15 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <groupId>com.simpligility.maven.plugins</groupId>
                 <artifactId>android-maven-plugin</artifactId>
                 <version>${android-maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <androidManifestFile>AndroidManifest.xml</androidManifestFile>
+                    <resourceDirectory>res</resourceDirectory>
+                    <assetsDirectory>assets</assetsDirectory>
+                    <nativeLibrariesDirectory>libs</nativeLibrariesDirectory>
                     <dexOptimize>false</dexOptimize>
                     <dex>
                         <jvmArguments>
