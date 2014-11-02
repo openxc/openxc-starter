@@ -13,9 +13,7 @@ import android.widget.TextView;
 
 import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
-import com.openxc.measurements.UnrecognizedMeasurementTypeException;
 import com.openxc.measurements.EngineSpeed;
-import com.openxc.remote.VehicleServiceException;
 
 public class StarterActivity extends Activity {
     private static final String TAG = "StarterActivity";
