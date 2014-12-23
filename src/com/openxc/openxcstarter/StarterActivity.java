@@ -63,6 +63,7 @@ public class StarterActivity extends Activity {
      * function here whenever a new EngineSpeed value arrives.
      */
     EngineSpeed.Listener mSpeedListener = new EngineSpeed.Listener() {
+        @Override
         public void receive(Measurement measurement) {
             // When we receive a new EngineSpeed value from the car, we want to
             // update the UI to display the new value. First we cast the generic
