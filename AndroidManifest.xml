@@ -24,11 +24,6 @@
         </activity>
 
         <service android:name="com.openxc.VehicleManager"/>
-        <service android:name="com.openxc.remote.VehicleService" android:process=":remote">
-            <intent-filter>
-                <action android:name="com.openxc.remote.VehicleServiceInterface" />
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>
