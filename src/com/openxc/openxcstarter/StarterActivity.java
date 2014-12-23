@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.openxcplatform.openxcstarter.R;
 import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.EngineSpeed;
