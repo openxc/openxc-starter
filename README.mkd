@@ -6,7 +6,7 @@ started app [tutorial](http://openxcplatform.com/getting-started/tutorial.html)
 to learn more about what this code does. You can also use this project to
 jumpstart your own OpenXC app.
 
-This version of the project requires v6.0.0 or later of the OpenXC Android
+This version of the project requires v6.1.6 or later of the OpenXC Android
 library.
 
 ## License
