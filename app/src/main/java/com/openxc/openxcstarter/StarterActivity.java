@@ -28,7 +28,7 @@ public class StarterActivity extends Activity {
         setContentView(R.layout.activity_starter);
         // grab a reference to the engine speed text object in the UI, so we can
         // manipulate its value later from Java code
-        mEngineSpeedView = (TextView) findViewById(R.id.vehicle_speed);
+        mEngineSpeedView = (TextView) findViewById(R.id.engine_speed);
     }
 
     @Override
