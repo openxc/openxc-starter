@@ -18,6 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
-        android:id="@+id/vehicle_speed" />
+        android:id="@+id/engine_speed" />
     
 </RelativeLayout>
