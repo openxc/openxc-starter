@@ -11,16 +11,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.openxc.messages.EventedSimpleVehicleMessage;
+import com.openxc.messages.SimpleVehicleMessage;
 import com.openxcplatform.openxcstarter.R;
 import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.EngineSpeed;
+import com.openxc.messages.VehicleMessage;
+
+
 
 public class StarterActivity extends Activity {
     private static final String TAG = "StarterActivity";
 
     private VehicleManager mVehicleManager;
     private TextView mEngineSpeedView;
+    private TextView customMessageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,7 @@ public class StarterActivity extends Activity {
         // grab a reference to the engine speed text object in the UI, so we can
         // manipulate its value later from Java code
         mEngineSpeedView = (TextView) findViewById(R.id.engine_speed);
+        customMessageView = (TextView) findViewById(R.id.custom_message);
     }
 
     @Override
@@ -85,6 +92,49 @@ public class StarterActivity extends Activity {
         }
     };
 
+
+    private VehicleMessage.Listener customListener = new VehicleMessage.Listener() {
+        @Override
+        public void receive(final VehicleMessage message) {
+                StarterActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        if(message instanceof EventedSimpleVehicleMessage) {
+                            SimpleVehicleMessage convertedMsg = new SimpleVehicleMessage(message.getTimestamp(),
+                                    ((EventedSimpleVehicleMessage) message).getName(),
+                                    ((EventedSimpleVehicleMessage) message).getValue() +
+                                            ": " + ((EventedSimpleVehicleMessage) message).getEvent());
+                            if (convertedMsg.getName().equalsIgnoreCase("custom_message")) {
+                                customMessageView.setText(convertedMsg.getName()+": " + convertedMsg.getValue());
+                            }
+                        }
+                        else {
+                            SimpleVehicleMessage convertedMsg = new SimpleVehicleMessage(message.getTimestamp(),
+                                    ((SimpleVehicleMessage) message).getName(),
+                                    ((SimpleVehicleMessage) message).getValue());
+                            if (convertedMsg.getName().equalsIgnoreCase("custom_message")) {
+                                customMessageView.setText(convertedMsg.getName() +": "+ convertedMsg.getValue());
+                            }
+
+                        }
+                    }
+                });
+        }
+    };
+
+
+ /*   //used to parse the generic listener into the listview
+    private VehicleMessage.Listener mListener = new VehicleMessage.Listener() {
+        @Override
+        public void receive(final VehicleMessage message) {
+                StarterActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                       // mAdapter.add(message.asSimpleMessage());
+                        mEngineSpeedView.setText("custom");
+                    }
+                });
+        }
+    };
+*/
     private ServiceConnection mConnection = new ServiceConnection() {
         // Called when the connection with the VehicleManager service is
         // established, i.e. bound.
@@ -102,6 +152,9 @@ public class StarterActivity extends Activity {
             // we request that the VehicleManager call its receive() method
             // whenever the EngineSpeed changes
             mVehicleManager.addListener(EngineSpeed.class, mSpeedListener);
+
+            //generic listener
+            mVehicleManager.addListener(SimpleVehicleMessage.class, customListener);
         }
 
         // Called when the connection with the service disconnects unexpectedly
