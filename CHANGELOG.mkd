@@ -1,0 +1,10 @@
+# OpenXC Starter Changelog
+
+## v1.1
+
+* Updated gradle plugin to 3.1.2
+* Updated android sdk to 27 (8.1)
+
+## v1.0
+
+* Initial release
