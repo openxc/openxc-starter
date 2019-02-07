@@ -1,16 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.openxcplatform.openxcstarter"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 28
+        multiDexEnabled false
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
@@ -19,5 +23,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.openxcplatform:library:6.1.6+'
+    implementation 'com.google.guava:guava:24.1-android'
+    implementation 'com.openxcplatform:library:7.0.6'
 }
