@@ -1,5 +1,5 @@
 language: android
-dist: precise
+dist: trusty
 sudo: false
 jdk:
 - openjdk8
