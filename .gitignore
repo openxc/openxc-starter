@@ -8,6 +8,7 @@ reference
 .settings
 .project
 .classpath
+.idea/
 
 # Gradle files
 .gradle/
