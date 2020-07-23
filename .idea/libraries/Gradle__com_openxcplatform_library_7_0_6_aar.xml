@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.openxcplatform:library:7.0.6@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-7.0.6.aar/a3c8e97dc1f427f003e8427053254e0d/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-7.0.6.aar/a3c8e97dc1f427f003e8427053254e0d/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.openxcplatform/library/7.0.6/5c4153270c1f2b1ea434c7cc6d19cf02953b62c4/library-7.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
