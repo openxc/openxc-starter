@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.openxcplatform:library:7.0.6@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-7.0.6.aar/a3c8e97dc1f427f003e8427053254e0d/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-7.0.6.aar/a3c8e97dc1f427f003e8427053254e0d/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-7.0.6.aar/8e56f20d86064475ba547d8c0406e795/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-7.0.6.aar/8e56f20d86064475ba547d8c0406e795/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

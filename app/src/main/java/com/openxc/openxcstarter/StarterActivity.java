@@ -1,6 +1,5 @@
 package com.openxc.openxcstarter;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +15,9 @@ import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.EngineSpeed;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.PackageManager;
 
 public class StarterActivity extends AppCompatActivity {
