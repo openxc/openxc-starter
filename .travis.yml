@@ -12,6 +12,7 @@ android:
   - sys-img-armeabi-v7a-android-26
   - extra-android-support
   - extra-android-m2repository
+  - extra-google-m2repository
 env:
   global:
   - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
