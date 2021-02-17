@@ -1,6 +1,5 @@
 package com.openxc.openxcstarter;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +15,18 @@ import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.EngineSpeed;
 
-public class StarterActivity extends Activity {
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.pm.PackageManager;
+
+public class StarterActivity extends AppCompatActivity {
     private static final String TAG = "StarterActivity";
+    private static final String PERMISSION_TEST = "com.openxc.permission.TEST";
+    private static final String PERMTAG = "PermissionTest";
+    private static final String CATEGORY = "android.intent.category.DEFAULT";
+    private static final int REQUEST_CODE_START_PROTECTED_ACTIVITY = 0x0;
+
 
     private VehicleManager mVehicleManager;
     private TextView mEngineSpeedView;
@@ -53,8 +62,39 @@ public class StarterActivity extends Activity {
         // When the activity starts up or returns from the background,
         // re-connect to the VehicleManager so we can receive updates.
         if(mVehicleManager == null) {
-            Intent intent = new Intent(this, VehicleManager.class);
-            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+            if (ActivityCompat.checkSelfPermission(this, PERMISSION_TEST) == PackageManager.PERMISSION_GRANTED) {
+                Log.i(PERMTAG, "PERMISSION_GRANTED");
+                Intent intent = new Intent(this, VehicleManager.class);
+                intent.setAction(PERMISSION_TEST);
+                intent.addCategory(CATEGORY);
+                bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+            }
+            else {
+                ActivityCompat.requestPermissions(this, new String[]{
+                        PERMISSION_TEST
+                }, REQUEST_CODE_START_PROTECTED_ACTIVITY);
+            }
+
+            }
+
+        }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_START_PROTECTED_ACTIVITY) {
+            for (int i = 0; i < permissions.length; i++) {
+                String permission = permissions[i];
+                int grantResult = grantResults[i];
+                if (PERMISSION_TEST.equals(permission)) {
+                    if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                        Log.i(PERMTAG, "PERMISSION_GRANTED");
+                    } else if (grantResult == PackageManager.PERMISSION_DENIED) {
+                        Log.i(PERMTAG, "PERMISSION_DENIED");
+                    }
+                }
+            }
         }
     }
 

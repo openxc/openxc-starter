@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId "com.openxcplatform.openxcstarter"
+        minSdkVersion 18
+        targetSdkVersion 28
+        multiDexEnabled false
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+def siteUrl = 'http://openxcplatform.com'
+def gitUrl = 'https://github.com/openxc/openxc-android.git'
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                name 'OpenXC Android Library'
+                packaging 'aar'
+                description 'OpenXC vehicle data library for Android applications'
+                url siteUrl
+
+                scm {
+                    url 'https://github.com/openxc/openxc-android'
+                    connection gitUrl
+                    developerConnection gitUrl
+                }
+
+                licenses {
+                    license {
+                        name 'BSD License'
+                        url 'http://opensource.org/licenses/BSD-2-Clause'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'peplin'
+                        name 'Chris Peplin'
+                        email 'chris.peplin@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:24.1-android'
+    implementation project(':library')
+}
